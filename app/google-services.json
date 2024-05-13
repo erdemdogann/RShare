@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "607863991144",
+    "project_id": "rshare-9c64a",
+    "storage_bucket": "rshare-9c64a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607863991144:android:f18001d697dcfdb28b84dd",
+        "android_client_info": {
+          "package_name": "com.example.rshare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLsL4ofm4whXM0aG4F_plyMcHt62sqkj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
