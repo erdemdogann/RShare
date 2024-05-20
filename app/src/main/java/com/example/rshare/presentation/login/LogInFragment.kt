@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.rshare.R
 import com.example.rshare.databinding.FragmentLogInBinding
+import com.example.rshare.presentation.signup.SignUpFragmentDirections
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth

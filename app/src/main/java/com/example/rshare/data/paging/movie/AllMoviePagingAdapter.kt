@@ -1,24 +1,24 @@
-package com.example.rshare.data.paging.anime
+package com.example.movieapi.data.paging.allmovie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rshare.data.dto.anime.Data
+import com.example.movieapi.data.dto.movie.Result
 import com.example.rshare.databinding.PagingCardBinding
-import com.example.rshare.loadImage
+import com.example.rshare.loadMovieImage
 
-class AnimePagingAdapter :
-    PagingDataAdapter<Data, AnimePagingAdapter.Holder>(diffCallback) {
+class AllMoviePagingAdapter :
+    PagingDataAdapter<Result, AllMoviePagingAdapter.Holder>(diffCallback) {
 
     companion object {
-        val diffCallback = object : DiffUtil.ItemCallback<Data>() {
-            override fun areItemsTheSame(oldItem: Data, newItem: Data): Boolean {
-                return oldItem.mal_id == newItem.mal_id
+        val diffCallback = object : DiffUtil.ItemCallback<Result>() {
+            override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
+                return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Data, newItem: Data): Boolean {
+            override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
                 return oldItem == newItem
             }
         }
@@ -26,10 +26,10 @@ class AnimePagingAdapter :
 
     class Holder(private val binding: PagingCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(anime: Data?) {
+        fun bind(movie: Result?) {
             binding.apply {
-                animeName.text =anime?.title
-                animeImage.loadImage(anime?.images?.jpg?.image_url)
+                animeName.text = movie?.title
+                animeImage.loadMovieImage(movie?.poster_path)
             }
         }
     }
@@ -41,4 +41,5 @@ class AnimePagingAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(PagingCardBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
+
 }

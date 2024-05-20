@@ -58,22 +58,22 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     val nav_version = "2.7.6"
-//Hilt
+    //Hilt
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
 
-    implementation ("com.google.code.gson:gson:2.8.7")
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.google.code.gson:gson:2.8.7")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // Kotlin
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.11.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
     //Glide
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
     //binding lib
     //implementation("com.github.Zhuinden:fragmentviewbindingdelegate-kt:1.0.2")
@@ -82,6 +82,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
 
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+
+    implementation("com.google.firebase:firebase-firestore")
 }
 kapt {
     correctErrorTypes = true
