@@ -12,6 +12,8 @@ import com.example.rshare.loadMovieImage
 class AllMoviePagingAdapter :
     PagingDataAdapter<Result, AllMoviePagingAdapter.Holder>(diffCallback) {
 
+    var onClick: (String?) -> Unit = {}
+
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<Result>() {
             override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
@@ -24,12 +26,15 @@ class AllMoviePagingAdapter :
         }
     }
 
-    class Holder(private val binding: PagingCardBinding) :
+    inner class Holder(private val binding: PagingCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Result?) {
             binding.apply {
                 animeName.text = movie?.title
                 animeImage.loadMovieImage(movie?.poster_path)
+                root.setOnClickListener {
+                    onClick(movie?.poster_path)
+                }
             }
         }
     }

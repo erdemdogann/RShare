@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/allMovieFragment">
+    app:startDestination="@id/shareFragment">
 
     <fragment
         android:id="@+id/logInFragment"
@@ -27,5 +27,21 @@
         android:id="@+id/allMovieFragment"
         android:name="com.example.rshare.presentation.main.allmovie.AllMovieFragment"
         android:label="fragment_all_movie"
-        tools:layout="@layout/fragment_all_movie" />
+        tools:layout="@layout/fragment_all_movie" >
+        <action
+            android:id="@+id/sendMovie"
+            app:destination="@id/shareFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareFragment"
+        android:name="com.example.rshare.presentation.main.share.ShareFragment"
+        android:label="fragment_share"
+        tools:layout="@layout/fragment_share" >
+        <action
+            android:id="@+id/selectMovie"
+            app:destination="@id/allMovieFragment" />
+        <argument
+            android:name="movieId"
+            app:argType="string" />
+    </fragment>
 </navigation>

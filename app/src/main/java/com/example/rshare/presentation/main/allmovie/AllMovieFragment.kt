@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieapi.data.paging.allmovie.AllMoviePagingAdapter
 import com.example.rshare.databinding.FragmentAllMovieBinding
@@ -47,6 +48,15 @@ class AllMovieFragment : Fragment() {
             allMovie.apply {
                 adapter = pagingAdapter
                 layoutManager = GridLayoutManager(requireContext(), 2)
+            }
+            pagingAdapter.onClick = {
+                var movie = it
+                if (movie != null) {
+                    if (movie.isNotEmpty()) {
+                        findNavController().navigate(AllMovieFragmentDirections.sendMovie(movie))
+                    }
+                }
+
             }
         }
     }
