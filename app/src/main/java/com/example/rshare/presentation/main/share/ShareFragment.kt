@@ -9,12 +9,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.rshare.R
 import com.example.rshare.databinding.FragmentShareBinding
+import com.example.rshare.loadImage
+import com.example.rshare.loadMovieImage
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
 class ShareFragment : Fragment() {
 
     private lateinit var binding: FragmentShareBinding
+    private val args: ShareFragmentArgs by navArgs()
     val db = Firebase.firestore
 
     override fun onCreateView(
@@ -34,9 +37,10 @@ class ShareFragment : Fragment() {
             shareImage.setOnClickListener {
                 findNavController().navigate(ShareFragmentDirections.selectMovie())
             }
-            val bundle:ShareFragmentArgs by navArgs()
-            val imageName= bundle.movieId
-            println(imageName)
+            val imageName = args.movieId
+            if (imageName?.isNotEmpty()==true) {
+                shareImage.loadMovieImage(imageName)
+            }
         }
     }
 

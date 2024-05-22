@@ -8,15 +8,9 @@ import retrofit2.http.Query
 
 interface RShareApi {
     companion object {
-        const val ANIME_URL = "https://api.jikan.moe/v4/"
         const val MOVIE_URL = "https://api.themoviedb.org"
         const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500/"
     }
-
-    @GET("/anime")
-    suspend fun getAllAnime(
-        @Query("page") page: Int
-    ): Response<AnimeData>
 
     @GET("/3/discover/movie")
     suspend fun getAllMovie(

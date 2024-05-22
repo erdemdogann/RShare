@@ -1,7 +1,8 @@
 package com.example.rshare.di
 
+import com.example.rshare.data.api.AnimeApi
+import com.example.rshare.data.api.AnimeApi.Companion.ANIME_URL
 import com.example.rshare.data.api.RShareApi
-import com.example.rshare.data.api.RShareApi.Companion.ANIME_URL
 import com.example.rshare.data.api.RShareApi.Companion.MOVIE_URL
 import dagger.Module
 import dagger.Provides
@@ -18,15 +19,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-/*    @Provides
+    @Provides
     @Singleton
-    fun provideAnimeApi(): RShareApi {
+    fun provideAnimeApi(): AnimeApi {
         return Retrofit.Builder()
             .baseUrl(ANIME_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(RShareApi::class.java)
-    }*/
+            .create(AnimeApi::class.java)
+    }
 
     @Provides
     @Singleton

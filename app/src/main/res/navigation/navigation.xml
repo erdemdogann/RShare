@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/shareFragment">
+    app:startDestination="@id/animeFragment">
 
     <fragment
         android:id="@+id/logInFragment"
@@ -42,6 +42,13 @@
             app:destination="@id/allMovieFragment" />
         <argument
             android:name="movieId"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
+    <fragment
+        android:id="@+id/animeFragment"
+        android:name="com.example.rshare.presentation.main.anime.AnimeFragment"
+        android:label="fragment_anime"
+        tools:layout="@layout/fragment_anime" />
 </navigation>

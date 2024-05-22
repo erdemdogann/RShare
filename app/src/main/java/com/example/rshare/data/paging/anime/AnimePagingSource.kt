@@ -2,13 +2,13 @@ package com.example.rshare.data.paging.anime
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.rshare.data.api.RShareApi
+import com.example.rshare.data.api.AnimeApi
 import com.example.rshare.data.dto.anime.Data
 import retrofit2.HttpException
 
 private const val MAX_PAGE = 500
 class AnimePagingSource(
-    private val api:RShareApi
+    private val api:AnimeApi
 ):PagingSource<Int, Data>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Data> {
         return try {
