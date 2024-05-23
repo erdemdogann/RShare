@@ -1,10 +1,13 @@
 package com.example.rshare.presentation.main.share
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.rshare.R
@@ -25,21 +28,46 @@ class ShareFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding=FragmentShareBinding.inflate(inflater,container,false)
+        binding = FragmentShareBinding.inflate(inflater, container, false)
 
         setupBinding()
 
         return binding.root
     }
 
-    private fun setupBinding(){
+    private fun setupBinding() {
         binding.apply {
             shareImage.setOnClickListener {
                 findNavController().navigate(ShareFragmentDirections.selectMovie())
             }
             val imageName = args.movieId
-            if (imageName?.isNotEmpty()==true) {
+            if (imageName?.isNotEmpty() == true) {
                 shareImage.loadMovieImage(imageName)
+            }
+            share.setOnClickListener {
+                if (imageName?.isNotEmpty() == true && comment.text.isNotEmpty()) {
+                    val share = hashMapOf(
+                        "user" to "Erdem",
+                        "image" to "$imageName",
+                        "comment" to "${comment.text}",
+                    )
+
+                    db.collection("users")
+                        .add(share)
+                        .addOnSuccessListener {
+                            Toast.makeText(requireContext(), "Paylaşıldı", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w(TAG, "Error adding document", e)
+                        }
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Lütfen boş alanları doldurunuz",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
