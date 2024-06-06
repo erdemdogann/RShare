@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rshare.R
 import com.example.rshare.data.dto.getdata.ShareGetData
 import com.example.rshare.databinding.FragmentHomeBinding
@@ -17,6 +20,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     val db = Firebase.firestore
     private lateinit var shareList: ArrayList<ShareGetData>
+    private lateinit var adapter: HomeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,31 +30,38 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
         shareList = ArrayList<ShareGetData>()
+        adapter = HomeAdapter(shareList)
         getData()
+        uiSet()
 
         return binding.root
     }
 
+    private fun uiSet() {
+        binding.apply {
+            shareList.adapter = adapter
+            shareList.layoutManager = LinearLayoutManager(context)
+            share.setOnClickListener {
+findNavController().navigate(HomeFragmentDirections.gotoShare())
+            }
+        }
+    }
+
     private fun getData() {
-        db.collection("users").addSnapshotListener { value, error ->
-            if (error != null) {
-                Toast.makeText(requireContext(), "hata", Toast.LENGTH_SHORT).show()
-            } else {
-                if (value != null) {
-                    if (!value.isEmpty) {
-                        val datas = value.documents
-                        for (data in datas) {
-                            val comment = data.get("comment") as String
-                            val users = data.get("user") as String
-                            val image = data.get("image") as String
+        db.collection("users").get().addOnSuccessListener { result ->
+            if (result != null) {
+                val datas = result.documents
+                for (data in datas) {
+                    val comment = data.get("comment") as String
+                    val users = data.get("user") as String
+                    val image = data.get("image") as String
 
-                            println(comment)
+                    println(comment)
 
-                            val post = ShareGetData(users, comment, image)
-                            shareList.add(post)
-                        }
-                    }
+                    val post = ShareGetData(users, comment, image)
+                    shareList.add(post)
                 }
+                adapter.notifyDataSetChanged()
             }
         }
     }
