@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.rshare.data.paging.anime.AnimePagingAdapter
 import com.example.rshare.databinding.FragmentAnimeBinding
+import com.example.rshare.presentation.main.allmovie.AllMovieFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -38,6 +41,27 @@ class AnimeFragment : Fragment() {
         binding.apply {
             animeRV.adapter = pagingAdapter
             animeRV.layoutManager = GridLayoutManager(requireContext(), 2)
+            searchAnime.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    //buraya gelicek
+                    return false
+                }
+            })
+        }
+        pagingAdapter.onClick = {
+            var anime = it
+            if (anime != null) {
+                if (anime.isNotEmpty()) {
+                    findNavController().navigate(
+                        AnimeFragmentDirections.backShare().setMovieId(anime)
+                            .setType("anime")
+                    )
+                }
+            }
         }
     }
 

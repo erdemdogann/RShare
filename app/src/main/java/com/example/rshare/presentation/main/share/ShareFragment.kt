@@ -38,11 +38,19 @@ class ShareFragment : Fragment() {
     private fun setupBinding() {
         binding.apply {
             shareImage.setOnClickListener {
-                findNavController().navigate(ShareFragmentDirections.selectMovie())
+                findNavController().navigate(ShareFragmentDirections.shareAnime())
             }
             val imageName = args.movieId
-            if (imageName?.isNotEmpty() == true) {
-                shareImage.loadMovieImage(imageName)
+
+            val type = args.type
+            if (type == "movie") {
+                if (imageName?.isNotEmpty() == true) {
+                    shareImage.loadMovieImage(imageName)
+                }
+            }else if (type == "anime"){
+                if (imageName?.isNotEmpty() == true) {
+                    shareImage.loadImage(imageName)
+                }
             }
             share.setOnClickListener {
                 if (imageName?.isNotEmpty() == true && comment.text.isNotEmpty()) {
@@ -50,6 +58,7 @@ class ShareFragment : Fragment() {
                         "user" to "Erdem",
                         "image" to "$imageName",
                         "comment" to "${comment.text}",
+                        "type" to "$type"
                     )
 
                     db.collection("users")
@@ -57,6 +66,7 @@ class ShareFragment : Fragment() {
                         .addOnSuccessListener {
                             Toast.makeText(requireContext(), "Paylaşıldı", Toast.LENGTH_SHORT)
                                 .show()
+                            findNavController().navigate(ShareFragmentDirections.backMain())
                         }
                         .addOnFailureListener { e ->
                             Log.w(TAG, "Error adding document", e)

@@ -53,7 +53,10 @@ class AllMovieFragment : Fragment() {
                 var movie = it
                 if (movie != null) {
                     if (movie.isNotEmpty()) {
-                        findNavController().navigate(AllMovieFragmentDirections.sendMovie().setMovieId(movie))
+                        findNavController().navigate(
+                            AllMovieFragmentDirections.sendMovie().setMovieId(movie)
+                                .setType("movie")
+                        )
                     }
                 }
 

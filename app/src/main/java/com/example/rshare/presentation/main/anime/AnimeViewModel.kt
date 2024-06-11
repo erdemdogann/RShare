@@ -6,10 +6,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import androidx.paging.filter
 import com.example.rshare.data.api.AnimeApi
 import com.example.rshare.data.api.RShareApi
 import com.example.rshare.data.paging.anime.AnimePagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.filter
 import javax.inject.Inject
 
 @HiltViewModel

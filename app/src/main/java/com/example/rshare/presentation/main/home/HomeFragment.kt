@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
             shareList.adapter = adapter
             shareList.layoutManager = LinearLayoutManager(context)
             share.setOnClickListener {
-findNavController().navigate(HomeFragmentDirections.gotoShare())
+                findNavController().navigate(HomeFragmentDirections.gotoShare())
             }
         }
     }
@@ -55,10 +55,11 @@ findNavController().navigate(HomeFragmentDirections.gotoShare())
                     val comment = data.get("comment") as String
                     val users = data.get("user") as String
                     val image = data.get("image") as String
+                    val type = data.get("type") as String
 
                     println(comment)
 
-                    val post = ShareGetData(users, comment, image)
+                    val post = ShareGetData(users, comment, image, type)
                     shareList.add(post)
                 }
                 adapter.notifyDataSetChanged()

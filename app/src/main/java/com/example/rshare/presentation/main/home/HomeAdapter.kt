@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rshare.data.dto.getdata.ShareGetData
-import com.example.rshare.data.dto.share.ShareData
 import com.example.rshare.databinding.SharelistCardBinding
 import com.example.rshare.loadImage
 import com.example.rshare.loadMovieImage
@@ -18,7 +17,12 @@ class HomeAdapter(
             binding.apply {
                 sharePerson.text = shareData.users
                 shareName.text = shareData.comment
-                shareImage.loadMovieImage(shareData.image)
+                if (shareData.type == "movie") {
+                    shareImage.loadMovieImage(shareData.image)
+                } else {
+                    shareImage.loadImage(shareData.image)
+                }
+                shareType.text = shareData.type
             }
         }
     }
