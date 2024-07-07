@@ -41,16 +41,6 @@ class AnimeFragment : Fragment() {
         binding.apply {
             animeRV.adapter = pagingAdapter
             animeRV.layoutManager = GridLayoutManager(requireContext(), 2)
-            searchAnime.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return false
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    //buraya gelicek
-                    return false
-                }
-            })
         }
         pagingAdapter.onClick = {
             var anime = it

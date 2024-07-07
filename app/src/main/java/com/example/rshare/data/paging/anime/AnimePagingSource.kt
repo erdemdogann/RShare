@@ -7,9 +7,11 @@ import com.example.rshare.data.dto.anime.Data
 import retrofit2.HttpException
 
 private const val MAX_PAGE = 500
+
 class AnimePagingSource(
-    private val api:AnimeApi
-):PagingSource<Int, Data>() {
+    private val api: AnimeApi
+) : PagingSource<Int, Data>() {
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Data> {
         return try {
             val currentPage = params.key ?: 1

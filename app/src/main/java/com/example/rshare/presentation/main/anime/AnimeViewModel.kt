@@ -19,10 +19,9 @@ class AnimeViewModel @Inject constructor(
     private val api: AnimeApi
 ) : ViewModel() {
     val anime = Pager(
-    PagingConfig(pageSize = 20)
+        PagingConfig(pageSize = 20)
     ) {
-        Log.d("AnimeViewModel", "PagingData oluşturuluyor...")
         AnimePagingSource(api)
     }.flow
-    .cachedIn(viewModelScope)
+        .cachedIn(viewModelScope)
 }
